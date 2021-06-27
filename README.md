@@ -1,6 +1,5 @@
 # Cryptocurrencies
 Unsupervised Learning, K-means
-# Credit_Risk_Analysis
 
 <p align="center">
   <img src="images/pexels-alesia-kozik-6765369.jpg" width="400">
