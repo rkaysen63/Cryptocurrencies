@@ -3,7 +3,7 @@ Unsupervised Learning, K-means
 # Credit_Risk_Analysis
 
 <p align="center">
-  <img src="images/Loan-Free-PNG-Image.png" width="400">
+  <img src="images/pexels-alesia-kozik-6765369.jpg" width="400">
   <br/><br/>
   <a href="#"></a>
 </p>
