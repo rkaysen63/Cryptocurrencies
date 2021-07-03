@@ -170,11 +170,42 @@
   <br/><br/>  
 </p><br/><br/> 
 
-* A table with tradable cryptocurrencies is created using the hvplot.table() function (3 pt)
-* The total number of tradable cryptocurrencies is printed (2 pt)
+* Create table of tradable cryptocurrencies.<br/><br/>
+
+      clustered_df.hvplot.table(columns=['CoinName',
+                                         'Algorithm',
+                                         'ProofType',
+                                         'TotalCoinSupply',
+                                         'TotalCoinsMined',
+                                         'Class'])<br/><br/>
+
+<p align="center">
+  <img src="images/clustered_df_hvplot.table.png" width="800">
+</p><br/><br/> 
+
+* Print the total number of tradable cryptocurrencies.<br/><br/>
+
+      num_tradable = len(clustered_df["CoinName"])
+      print(f"There are {num_tradable} tradable cryptocurrencies.")<br/><br/>
+
+<p align="center">
+  <img src="images/print_number.png" width="150">
+</p><br/><br/>      
+      
 * A DataFrame is created that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns (5 pt)
 * A hvplot scatter plot is created where the X-axis is "TotalCoinsMined", the Y-axis is "TotalCoinSupply", the data is ordered by "Class", and it shows the CoinName when you hover over the data point (10 pt)
 
+* 3D-Scatter plot "TotalCoinsMined" by "TotalCoinSupply" by "Class"<br/><br/>  
+<p align="center">
+  <img src="images/plot_df_px.scatter_3d_cl0.png" width="800">
+  <br/><br/> 
+  <img src="images/plot_df_px.scatter_3d_cl1.png" width="800">
+  <br/><br/>  
+  <img src="images/plot_df_px.scatter_3d_cl2.png" width="800">
+  <br/><br/> 
+  <img src="images/plot_df_px.scatter_3d_cl3.png" width="800">
+  <br/><br/>  
+</p><br/><br/> 
 
 
 
