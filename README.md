@@ -87,14 +87,62 @@
   <img src="images/pca_df_info.png" width="300">
 </p><br/><br/> 
 
-### Deliverable 3: Use Ensemble Classifiers to Predict Credit Risk.  Complete all requirements below:
+### Clustering Cryptocurrencies Using K-means
+* Find best K value using the elbow curve is created using hvPlot to find the best value for K.<br/><br/>
 
-* The K-means algorithm is used to cluster the cryptocurrencies using the PCA data, where the following steps have been completed:
-  * An elbow curve is created using hvPlot to find the best value for K (10 pt)
-  * Predictions are made on the K clusters of the cryptocurrencies’ data (5 pt)
-  * A new DataFrame is created with the same index as the crypto_df DataFrame and has the following columns: Algorithm, ProofType, TotalCoinsMined, TotalCoinSupply, PC 1, PC 2, PC 3, CoinName, and Class (5 pt)
+      # Create an empty list to hold inertia values
+      inertia = []
 
-### Deliverable 4: 
+      # Store Values of K to Plot
+      k = list(range(1, 11))
+
+      #Loop through K values and find inertia
+      for i in k:
+          km = KMeans(n_clusters=i, random_state=0)
+          km.fit(pca_df)
+          inertia.append(km.inertia_)
+
+      # Creating the Elbow Curve
+      elbow_data = {"k": k, "inertia": inertia}
+      df_elbow = pd.DataFrame(elbow_data)
+
+      plt.plot(df_elbow['k'], df_elbow['inertia'])
+      plt.xticks(list(range(11)))
+      plt.title('Elbow Curve')
+      plt.xlabel('Number of clusters')
+      plt.ylabel('Inertia')
+      plt.show()<br/><br/>
+
+<p align="center">
+  <a href="#">Elbow Curve indicates best number of clusters, k=4.</a>
+  <br/><br/> 
+  <img src="images/elbow_curve.png" width="400">
+</p><br/><br/> 
+
+* Predictions are made on the K clusters of the cryptocurrencies’ data <br/><br/>
+
+      # Initialize the K-Means model.
+      model = KMeans(n_clusters=4, random_state=0)
+
+      # Fit the model
+      model.fit(pca_df)
+
+      # Predict clusters
+      predictions = model.predict(pca_df)
+      predictions<br/><br/>
+
+* A new DataFrame is created with the same index as the crypto_df DataFrame and has the following columns: Algorithm, ProofType, TotalCoinsMined, TotalCoinSupply, PC 1, PC 2, PC 3, CoinName, and Class <br/><br/>
+
+      clustered_df = pd.concat([crypto_df, pca_df], axis=1).reindex(crypto_df.index)<br/><br/>
+      clustered_df = pd.concat([clustered_df, names_df], axis=1).reindex(crypto_df.index)<br/><br/>
+
+<p align="center">
+  <a href="#">DataFrame showing four clusters or classes: clustered_df</a>
+  <br/><br/> 
+  <img src="images/clustered_df.png" width="800">
+</p><br/><br/> 
+
+### Visualizing Cryptocurrencies Results 
 * The clusters are plotted using a 3D scatter plot, and each data point shows the CoinName and Algorithm on hover (10 pt)
 * A table with tradable cryptocurrencies is created using the hvplot.table() function (3 pt)
 * The total number of tradable cryptocurrencies is printed (2 pt)
