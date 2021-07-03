@@ -21,14 +21,15 @@
 * Lesson Plan: UTA-VIRT-DATA-PT-02-2021-U-B-TTH, Module 18 Challenge
 
 ## Overview:
-* The purpose of this analysis of cryptocurrency data to determine which cryptocurrencies are on the trading market and how they can be grouped.  
+* The purpose of this analysis of the cryptocurrency data is to determine which of the cryptocurrencies are on the trading market and how they can be grouped.  
 * The analysis will be performed using unsupervised machine learning models.  
-  * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, create numeric variables for features, and the features scaled.  
-  * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize in three dimensions.  
+  * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, to create numeric variables for features, and to scale the features.  
+  * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize the results in three dimensions.  
   * The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
-  * The results will be tabularized and visualized through scatter plots.
+  * The results will be tabularized using hvplot.table and visualized through scatter plots.
 
 ## Results:
+* Data is loaded into a DataFrame using Pandas.
 <p align="center">
   <img src="images/load_crypto_df.png" width="600"><br/><br/> 
   <img src="images/crypto_df_info.png" width="350">
@@ -37,7 +38,7 @@
 ### Preprocessing the Data for PCA 
 * Remove cryptocurrencies that are not being traded.<br/><br/> 
   `crypto_df = crypto_df.loc[crypto_df["IsTrading"] == True,:]`<br/><br/> 
-* Drop "IsTrading column" column.<br/><br/> 
+* Drop "IsTrading" column.<br/><br/> 
   `crypto_df = crypto_df.drop(columns="IsTrading")`<br/><br/> 
 * Remove all rows that have at least one null value.<br/><br/> 
   `crypto_df = crypto_df.dropna()`<br/><br/> 
@@ -47,6 +48,7 @@
   `crypto_df = crypto_df.drop(columns="CoinName")`
   
 <p align="center">
+  <a href="#">Cleaned DataFrame</a> 
   <img src="images/crypto_df.png" width="450"><br/><br/> 
 </p><br/><br/> 
 
@@ -63,7 +65,7 @@
 `X = pd.get_dummies(crypto_df, columns=["Algorithm","ProofType"])`<br/><br/>
 
 <p align="center">
-  <img src="images/X.png" width="800">
+  <img src="images/X.png" width="1000">
 </p><br/><br/> 
 
 * Standardize features.
@@ -83,7 +85,7 @@
 </p><br/><br/> 
 
 ### Clustering Cryptocurrencies Using K-means
-* Find best K value using the elbow curve is created using hvPlot to find the best value for K.
+* Find best K value using an elbow curve.
 
       # Create an empty list to hold inertia values
       inertia = []
@@ -136,7 +138,7 @@
 </p><br/><br/> 
 
 ### Visualizing Cryptocurrencies Results 
-* 3D-Scatter plot, clustered PCA data.<br/><br/>  
+* Plot clustered PCA data in 3D. 
 
       fig = px.scatter_3d(
           data_frame=clustered_df,
@@ -163,7 +165,7 @@
   <br/><br/>  
 </p><br/><br/> 
 
-* Create table of tradable cryptocurrencies.<br/><br/>
+* Create table of tradable cryptocurrencies.
 
       clustered_df.hvplot.table(columns=['CoinName',
                                          'Algorithm',
@@ -176,7 +178,7 @@
   <img src="images/clustered_df_hvplot.table.png" width="800">
 </p><br/><br/> 
 
-* Print the total number of tradable cryptocurrencies.<br/><br/>
+* Print the total number of tradable cryptocurrencies.
 
       num_tradable = len(clustered_df["CoinName"])
       print(f"There are {num_tradable} tradable cryptocurrencies.")<br/><br/>
@@ -185,7 +187,7 @@
   <img src="images/print_number.png" width="150">
 </p><br/><br/>      
       
-* Create a DataFrame, plot_df, that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns.<br/><br/>
+* Create a DataFrame, plot_df, that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns.
 
       # Scaling data to create the scatter plot with tradable cryptocurrencies.
       coin_count_cols_df = clustered_df[["TotalCoinSupply", "TotalCoinsMined"]].copy()
@@ -194,7 +196,7 @@
       df1 = clustered_df[["CoinName", "Class"]].copy()
       plot_df = pd.concat([df_scaled, df1], axis=1).reindex(df1.index)<br/><br/>
 
-* A hvplot scatter plot "TotalCoinsMined" vs "TotalCoinSupply", the data is ordered by "Class". 
+* Plot "TotalCoinsMined" vs "TotalCoinSupply", the data is ordered by "Class", using hvplot.scatter. 
 
       plot_df.hvplot.scatter(
           x="TotalCoinsMined",
@@ -207,7 +209,7 @@
   <img src="images/plot_df_hvplot.scatter.png" width="800">
 </p><br/><br/>   
 
-* 3D-Scatter plot "TotalCoinsMined" by "TotalCoinSupply" by "Class"  
+* Plot "TotalCoinsMined" by "TotalCoinSupply" by "Class" in 3D.
 <p align="center">
   <img src="images/plot_df_px.scatter_3d_cl0.png" width="800">
   <br/><br/> 
