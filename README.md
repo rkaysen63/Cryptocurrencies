@@ -23,28 +23,57 @@
 ## Overview:
 * The purpose of this analysis of cryptocurrency data to determine which cryptocurrencies are on the trading market and how they can be grouped.  
 * The analysis will be performed using unsupervised machine learning models.  
-* The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, create numeric variables for features, and the features scaled.  
-* Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize in three dimensions.  
-* The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
-* The results will be tabularized and visualized through scatter plots.
+  * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, create numeric variables for features, and the features scaled.  
+  * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize in three dimensions.  
+  * The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
+  * The results will be tabularized and visualized through scatter plots.
 
 ## Results:
 <p align="center">
-  <a href="#">title</a>
+  <a href="#">crypto_df: crypto_data.csv is loaded into a DataFrame</a>
   <br/><br/> 
-  <img src="something_relevant.png" width="800">
+  <img src="images/load_crypto_df.png" width="600"><br/><br/> 
+  <img src="images/crypto_df_info.png" width="350">
 </p>
 
-### Deliverable 1: Preprocessing the Data for PCA 
-* Perform 5 preprocessing steps on the crypto_df DataFrame:
-  * All cryptocurrencies that are not being traded are removed (3 pt)
-  * The IsTrading column is dropped (3 pt)
-  * All the rows that have at least one null value are removed (3 pt)
-  * All the rows that do not have coins being mined are removed (3 pt)
-  * The CoinName column is dropped (3 pt)
-* A new DataFrame is created that stores all cryptocurrency names from the CoinName column and retains the index from the crypto_df DataFrame (5 pt)
-* The get_dummies() method is used to create variables for the text features, which are then stored in a new DataFrame, X (5 pt)
-* The features from the X DataFrame have been standardized using the StandardScaler fit_transform() function (5 pt)
+### Preprocessing the Data for PCA 
+* Remove cryptocurrencies that are not being traded.<br/><br/> 
+  `crypto_df = crypto_df.loc[crypto_df["IsTrading"] == True,:]`<br/><br/> 
+* Drop "IsTrading column" column.<br/><br/> 
+  `crypto_df = crypto_df.drop(columns="IsTrading")`<br/><br/> 
+* Remove all rows that have at least one null value.<br/><br/> 
+  `crypto_df = crypto_df.dropna()`<br/><br/> 
+* Remove all rows that do not have coins being mined.<br/><br/> 
+  `crypto_df = crypto_df[crypto_df["TotalCoinsMined"] > 0]`<br/><br/> 
+* Drop "CoinName" column.<br/><br/> 
+  `crypto_df = crypto_df.drop(columns="CoinName")`<br/><br/> 
+  
+<p align="center">
+  <a href="#">Cleaned Data:  crypto_df)</a>
+  <br/><br/> 
+  <img src="images/crypto_df.png" width="400"><br/><br/> 
+</p><br/><br/> 
+
+* Store all cryptocurrency names in a DataFrame.<br/><br/> 
+`names_df = crypto_df[["CoinName"]]`<br/><br/> 
+
+<p align="center">
+  <a href="#">Cryptocurrency Names:  names_df</a>
+  <br/><br/> 
+  <img src="images/names_df.png" width="100">
+</p><br/><br/> 
+
+* Create Features DataFrame, X.<br/><br/>
+`X = pd.get_dummies(crypto_df, columns=["Algorithm","ProofType"])`<br/><br/>
+
+<p align="center">
+  <a href="#">Features: X</a>
+  <br/><br/> 
+  <img src="images/X.png" width="800">
+</p><br/><br/> 
+
+* Standardize features.<br/><br/> 
+`X_scaled = StandardScaler().fit_transform(X)`<br/><br/> 
 
 ### Deliverable 2: Reducing Data Dimensions Using PCA
 * The PCA algorithm reduces the dimensions of the X DataFrame down to three principal components (10 pt)
