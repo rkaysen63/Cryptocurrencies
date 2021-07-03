@@ -51,16 +51,16 @@
 <p align="center">
   <a href="#">Cleaned Data:  crypto_df)</a>
   <br/><br/> 
-  <img src="images/crypto_df.png" width="400"><br/><br/> 
+  <img src="images/crypto_df.png" width="450"><br/><br/> 
 </p><br/><br/> 
 
 * Store all cryptocurrency names in a DataFrame.<br/><br/> 
 `names_df = crypto_df[["CoinName"]]`<br/><br/> 
 
 <p align="center">
-  <a href="#">Cryptocurrency Names:  names_df</a>
+  <a href="#">Coin Names:  names_df</a>
   <br/><br/> 
-  <img src="images/names_df.png" width="100">
+  <img src="images/names_df.png" width="150">
 </p><br/><br/> 
 
 * Create Features DataFrame, X.<br/><br/>
@@ -75,9 +75,17 @@
 * Standardize features.<br/><br/> 
 `X_scaled = StandardScaler().fit_transform(X)`<br/><br/> 
 
-### Deliverable 2: Reducing Data Dimensions Using PCA
-* The PCA algorithm reduces the dimensions of the X DataFrame down to three principal components (10 pt)
-* The pcs_df DataFrame is created and has the following three columns, PC 1, PC 2, and PC 3, and has the index from the crypto_df DataFrame (10 pt)
+### Reducing Data Dimensions Using PCA
+* Using the PCA algorithm, reduce the dimensions of the X DataFrame down to three principal components.<br/><br/> 
+`pca = PCA(n_components=3).fit_transform(X_scaled)`<br/><br/> 
+* Store principal components in a DataFrame.<br/><br/> 
+`pca_df = pd.DataFrame(data=pca, columns=["PC 1","PC 2","PC 3"], index=X.index)`<br/><br/> 
+
+<p align="center">
+  <a href="#">PCA Components: pca_df</a>
+  <br/><br/> 
+  <img src="images/pca_df_info.png" width="300">
+</p><br/><br/> 
 
 ### Deliverable 3: Use Ensemble Classifiers to Predict Credit Risk.  Complete all requirements below:
 
