@@ -49,7 +49,7 @@
   `crypto_df = crypto_df.drop(columns="CoinName")`<br/><br/> 
   
 <p align="center">
-  <a href="#">Cleaned Data:  crypto_df)</a>
+  <a href="#">Cleaned Data:  crypto_df</a>
   <br/><br/> 
   <img src="images/crypto_df.png" width="450"><br/><br/> 
 </p><br/><br/> 
@@ -143,7 +143,33 @@
 </p><br/><br/> 
 
 ### Visualizing Cryptocurrencies Results 
-* The clusters are plotted using a 3D scatter plot, and each data point shows the CoinName and Algorithm on hover (10 pt)
+* 3D-Scatter plot, clustered PCA data.<br/><br/>  
+
+      fig = px.scatter_3d(
+          data_frame=clustered_df,
+          x="PC 1",
+          y="PC 2",
+          z="PC 3",
+          color="Class",
+          symbol="Class",
+          hover_name=clustered_df["CoinName"],
+          hover_data=["Algorithm"],
+          width=800
+      ) 
+      fig.update_layout(legend=dict(x=0, y=1))
+      fig.show()<br/><br/> 
+
+<p align="center">
+  <img src="images/clustered_df_px.scatter_3d_cl0.png" width="800">
+  <br/><br/> 
+  <img src="images/clustered_df_px.scatter_3d_cl1.png" width="800">
+  <br/><br/>  
+  <img src="images/clustered_df_px.scatter_3d_cl2.png" width="800">
+  <br/><br/> 
+  <img src="images/clustered_df_px.scatter_3d_cl3.png" width="800">
+  <br/><br/>  
+</p><br/><br/> 
+
 * A table with tradable cryptocurrencies is created using the hvplot.table() function (3 pt)
 * The total number of tradable cryptocurrencies is printed (2 pt)
 * A DataFrame is created that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns (5 pt)
