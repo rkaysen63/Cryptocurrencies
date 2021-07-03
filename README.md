@@ -30,8 +30,6 @@
 
 ## Results:
 <p align="center">
-  <a href="#">crypto_df: crypto_data.csv is loaded into a DataFrame</a>
-  <br/><br/> 
   <img src="images/load_crypto_df.png" width="600"><br/><br/> 
   <img src="images/crypto_df_info.png" width="350">
 </p>
@@ -46,49 +44,46 @@
 * Remove all rows that do not have coins being mined.<br/><br/> 
   `crypto_df = crypto_df[crypto_df["TotalCoinsMined"] > 0]`<br/><br/> 
 * Drop "CoinName" column.<br/><br/> 
-  `crypto_df = crypto_df.drop(columns="CoinName")`<br/><br/> 
+  `crypto_df = crypto_df.drop(columns="CoinName")`
   
 <p align="center">
-  <a href="#">Cleaned Data:  crypto_df</a>
-  <br/><br/> 
   <img src="images/crypto_df.png" width="450"><br/><br/> 
 </p><br/><br/> 
 
-* Store all cryptocurrency names in a DataFrame.<br/><br/> 
+* Store all cryptocurrency names in a DataFrame.
+
 `names_df = crypto_df[["CoinName"]]`<br/><br/> 
 
 <p align="center">
-  <a href="#">Coin Names:  names_df</a>
-  <br/><br/> 
   <img src="images/names_df.png" width="150">
 </p><br/><br/> 
 
-* Create Features DataFrame, X.<br/><br/>
+* Create Features DataFrame, X.
+
 `X = pd.get_dummies(crypto_df, columns=["Algorithm","ProofType"])`<br/><br/>
 
 <p align="center">
-  <a href="#">Features: X</a>
-  <br/><br/> 
   <img src="images/X.png" width="800">
 </p><br/><br/> 
 
-* Standardize features.<br/><br/> 
+* Standardize features.
+ 
 `X_scaled = StandardScaler().fit_transform(X)`<br/><br/> 
 
 ### Reducing Data Dimensions Using PCA
-* Using the PCA algorithm, reduce the dimensions of the X DataFrame down to three principal components.<br/><br/> 
+* Using the PCA algorithm, reduce the dimensions of the X DataFrame down to three principal components.
+
 `pca = PCA(n_components=3).fit_transform(X_scaled)`<br/><br/> 
-* Store principal components in a DataFrame.<br/><br/> 
+* Store principal components in a DataFrame.
+
 `pca_df = pd.DataFrame(data=pca, columns=["PC 1","PC 2","PC 3"], index=X.index)`<br/><br/> 
 
 <p align="center">
-  <a href="#">PCA Components: pca_df</a>
-  <br/><br/> 
   <img src="images/pca_df_info.png" width="300">
 </p><br/><br/> 
 
 ### Clustering Cryptocurrencies Using K-means
-* Find best K value using the elbow curve is created using hvPlot to find the best value for K.<br/><br/>
+* Find best K value using the elbow curve is created using hvPlot to find the best value for K.
 
       # Create an empty list to hold inertia values
       inertia = []
@@ -119,7 +114,7 @@
   <img src="images/elbow_curve.png" width="400">
 </p><br/><br/> 
 
-* Predictions are made on the K clusters of the cryptocurrencies’ data <br/><br/>
+* Predict clusters using K-Means on PCA data.
 
       # Initialize the K-Means model.
       model = KMeans(n_clusters=4, random_state=0)
@@ -131,14 +126,12 @@
       predictions = model.predict(pca_df)
       predictions<br/><br/>
 
-* A new DataFrame is created with the same index as the crypto_df DataFrame and has the following columns: Algorithm, ProofType, TotalCoinsMined, TotalCoinSupply, PC 1, PC 2, PC 3, CoinName, and Class <br/><br/>
+* Create a new DataFrame is that has the following columns: Algorithm, ProofType, TotalCoinsMined, TotalCoinSupply, PC 1, PC 2, PC 3, CoinName, and Class.
 
       clustered_df = pd.concat([crypto_df, pca_df], axis=1).reindex(crypto_df.index)<br/><br/>
       clustered_df = pd.concat([clustered_df, names_df], axis=1).reindex(crypto_df.index)<br/><br/>
 
-<p align="center">
-  <a href="#">DataFrame showing four clusters or classes: clustered_df</a>
-  <br/><br/> 
+<p align="center"> 
   <img src="images/clustered_df.png" width="800">
 </p><br/><br/> 
 
@@ -192,10 +185,29 @@
   <img src="images/print_number.png" width="150">
 </p><br/><br/>      
       
-* A DataFrame is created that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns (5 pt)
-* A hvplot scatter plot is created where the X-axis is "TotalCoinsMined", the Y-axis is "TotalCoinSupply", the data is ordered by "Class", and it shows the CoinName when you hover over the data point (10 pt)
+* Create a DataFrame, plot_df, that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns.<br/><br/>
 
-* 3D-Scatter plot "TotalCoinsMined" by "TotalCoinSupply" by "Class"<br/><br/>  
+      # Scaling data to create the scatter plot with tradable cryptocurrencies.
+      coin_count_cols_df = clustered_df[["TotalCoinSupply", "TotalCoinsMined"]].copy()
+      coin_count_cols_scaled = MinMaxScaler().fit_transform(coin_count_cols_df)
+      df_scaled = pd.DataFrame(data=coin_count_cols_scaled, columns=["TotalCoinSupply","TotalCoinsMined"], index=clustered_df.index)
+      df1 = clustered_df[["CoinName", "Class"]].copy()
+      plot_df = pd.concat([df_scaled, df1], axis=1).reindex(df1.index)<br/><br/>
+
+* A hvplot scatter plot "TotalCoinsMined" vs "TotalCoinSupply", the data is ordered by "Class". 
+
+      plot_df.hvplot.scatter(
+          x="TotalCoinsMined",
+          y="TotalCoinSupply",
+          hover_cols=["CoinName"],
+          by="Class"
+      )<br/><br/> 
+
+<p align="center">
+  <img src="images/plot_df_hvplot.scatter.png" width="800">
+</p><br/><br/>   
+
+* 3D-Scatter plot "TotalCoinsMined" by "TotalCoinSupply" by "Class"  
 <p align="center">
   <img src="images/plot_df_px.scatter_3d_cl0.png" width="800">
   <br/><br/> 
