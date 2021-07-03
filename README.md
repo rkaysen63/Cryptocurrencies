@@ -1,5 +1,4 @@
 # Cryptocurrencies
-Unsupervised Learning, K-means
 
 <p align="center">
   <img src="images/pexels-alesia-kozik-6765369.jpg" width="400">
@@ -7,24 +6,27 @@ Unsupervised Learning, K-means
   <a href="#"></a>
 </p>
 
-
-
 ## Table of Contents
 * [Overview](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#overview)
 * [Resources](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#resources)
 * [Results](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#results)
 
 ## Resources:    
-* Data: 
-  *  
+* Data: crypto_data.csv
+  *  Data retrieved from https://min-api.cryptocompare.com/data/all/coinlist
 * Tools: 
-  * Python (Libraries: pandas, matplotlib, imblearn, sklearn)
+  * Python (Libraries: pandas, matplotlib, hvplot.pandas, plotly.express, sklearn.preprocessing, sklearn.decomposition, sklearn.cluster)
   * Jupyter Notebook
 * "Crypto Currency" image is courtesy of: https://www.pexels.com/@alesiakozik
 * Lesson Plan: UTA-VIRT-DATA-PT-02-2021-U-B-TTH, Module 18 Challenge
 
 ## Overview:
-* Overview of the loan prediction risk analysis:  The purpose of this analysis is well defined (4 pt)
+* The purpose of this analysis of cryptocurrency data to determine which cryptocurrencies are on the trading market and how they can be grouped.  
+* The analysis will be performed using unsupervised machine learning models.  
+* The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, create numeric variables for features, and the features scaled.  
+* Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize in three dimensions.  
+* The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
+* The results will be tabularized and visualized through scatter plots.
 
 ## Results:
 <p align="center">
