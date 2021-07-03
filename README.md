@@ -184,7 +184,7 @@
       print(f"There are {num_tradable} tradable cryptocurrencies.")<br/><br/>
 
 <p align="center">
-  <img src="images/print_number.png" width="150">
+  <img src="images/print_number.png" width="300">
 </p><br/><br/>      
       
 * Create a DataFrame, plot_df, that contains the clustered_df DataFrame index, the scaled data, and the CoinName and Class columns.
@@ -209,7 +209,7 @@
   <img src="images/plot_df_hvplot.scatter.png" width="800">
 </p><br/><br/>   
 
-* Plot "TotalCoinsMined" by "TotalCoinSupply" by "Class" in 3D.
+* Plot "TotalCoinsMined" by "TotalCoinSupply" by "Class" in 3D to differentiate the classes.
 <p align="center">
   <img src="images/plot_df_px.scatter_3d_cl0.png" width="800">
   <br/><br/> 
