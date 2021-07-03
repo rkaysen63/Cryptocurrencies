@@ -1,15 +1,14 @@
 # Cryptocurrencies
 
 <p align="center">
-  <img src="images/pexels-alesia-kozik-6765369.jpg" width="400">
-  <br/><br/>
-  <a href="#"></a>
+  <img src="images/pexels-alesia-kozik-6765369.jpg" width="800">
 </p>
 
 ## Table of Contents
 * [Overview](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#overview)
 * [Resources](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#resources)
 * [Results](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#results)
+* [Summary](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#summary)
 
 ## Resources:    
 * Data: crypto_data.csv
@@ -221,6 +220,6 @@
   <br/><br/>  
 </p><br/><br/> 
 
-
+## Summary:
 
 [Back to the Table of Contents](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#table-of-contents)
