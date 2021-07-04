@@ -220,12 +220,8 @@
 </p><br/><br/> 
 
 ## Summary:
-* The purpose of this analysis of cryptocurrency data is to determine which of the cryptocurrencies are on the trading market and how they can be grouped.  
-* The analysis will be performed using unsupervised machine learning models.  
-  * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, to create numeric variables for features, and to scale the features.  
-  * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize the results in three dimensions.  
-  * The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
-  * The results will be visualized through both an hvplot.table and scatter plots.
- Using machine learning model, sklearn
+The results of preprocessing of cryptocurrency data narrowed down the original dataset from 1252 cryptocurrencies to 532 tradable cryptocurrencies.  The dataset had 98 features, i.e. 98 columns of independent variables that can be used to predict the behaviour of cryptocurrencies.  Using sklearn's PCA (Principal Component Analysis) algorithm, the features were reduced to 3 dimensions in order reduce run time and to aide in the visualization of the data.  Per the elbow curve plot, the cryptocurrencies can be grouped into 4 clusters.  Using sklearn's K-Means, the PCA DataFrame was fit to the model and the four clusters, or "Classes", were predicted.  The results are visualized above.  The first set of 3-D plots show the data sorted into 4 classes in three PCA dimensions.  It is followed by the results in tabular form and a 2-D plot of "TotalCoinsMined" versus "TotalCoinSupply", by "Class".  In the 2-D hvplot, some of the points lie upon others, making it difficult to see the separation of the data into classes. A 2nd set of 3-D plots were added in order to delineate the class distinctions in the "TotalCoinsMined" versus "TotalCoinSupply" plot.
+
+
 
 [Back to the Table of Contents](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#table-of-contents)
