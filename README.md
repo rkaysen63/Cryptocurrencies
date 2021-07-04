@@ -20,12 +20,12 @@
 * Lesson Plan: UTA-VIRT-DATA-PT-02-2021-U-B-TTH, Module 18 Challenge
 
 ## Overview:
-* The purpose of this analysis of the cryptocurrency data is to determine which of the cryptocurrencies are on the trading market and how they can be grouped.  
+* The purpose of this analysis of cryptocurrency data is to determine which of the cryptocurrencies are on the trading market and how they can be grouped.  
 * The analysis will be performed using unsupervised machine learning models.  
   * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, to create numeric variables for features, and to scale the features.  
   * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize the results in three dimensions.  
   * The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
-  * The results will be tabularized using hvplot.table and visualized through scatter plots.
+  * The results will be visualized through both an hvplot.table and scatter plots.
 
 ## Results:
 * Data is loaded into a DataFrame using Pandas.
@@ -47,37 +47,32 @@
   `crypto_df = crypto_df.drop(columns="CoinName")`
   
 <p align="center">
-  <a href="#">Cleaned DataFrame</a> 
-  <img src="images/crypto_df.png" width="450"><br/><br/> 
+  <a href="#">Cleaned DataFrame</a><br/><br/>
+  <img src="images/crypto_df.png" width="450"> 
 </p><br/><br/> 
 
-* Store all cryptocurrency names in a DataFrame.
-
-`names_df = crypto_df[["CoinName"]]`<br/><br/> 
+* Store all cryptocurrency names in a DataFrame.<br/><br/> 
+  `names_df = crypto_df[["CoinName"]]`<br/><br/> 
 
 <p align="center">
   <img src="images/names_df.png" width="150">
 </p><br/><br/> 
 
-* Create Features DataFrame, X.
-
-`X = pd.get_dummies(crypto_df, columns=["Algorithm","ProofType"])`<br/><br/>
+* Create Features DataFrame, X.<br/><br/>
+  `X = pd.get_dummies(crypto_df, columns=["Algorithm","ProofType"])`<br/><br/>
 
 <p align="center">
   <img src="images/X.png" width="1000">
 </p><br/><br/> 
 
-* Standardize features.
- 
-`X_scaled = StandardScaler().fit_transform(X)`<br/><br/> 
+* Standardize features.<br/><br/> 
+  `X_scaled = StandardScaler().fit_transform(X)`<br/><br/> 
 
 ### Reducing Data Dimensions Using PCA
-* Using the PCA algorithm, reduce the dimensions of the X DataFrame down to three principal components.
-
-`pca = PCA(n_components=3).fit_transform(X_scaled)`<br/><br/> 
-* Store principal components in a DataFrame.
-
-`pca_df = pd.DataFrame(data=pca, columns=["PC 1","PC 2","PC 3"], index=X.index)`<br/><br/> 
+* Using the PCA algorithm, reduce the dimensions of the X DataFrame down to three principal components.<br/><br/>
+  `pca = PCA(n_components=3).fit_transform(X_scaled)`<br/><br/> 
+* Store principal components in a DataFrame.<br/><br/>
+  `pca_df = pd.DataFrame(data=pca, columns=["PC 1","PC 2","PC 3"], index=X.index)`<br/><br/> 
 
 <p align="center">
   <img src="images/pca_df_info.png" width="300">
@@ -221,5 +216,6 @@
 </p><br/><br/> 
 
 ## Summary:
+
 
 [Back to the Table of Contents](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#table-of-contents)
