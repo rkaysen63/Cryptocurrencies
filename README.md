@@ -190,6 +190,10 @@
       df1 = clustered_df[["CoinName", "Class"]].copy()
       plot_df = pd.concat([df_scaled, df1], axis=1).reindex(df1.index)<br/><br/>
 
+<p align="center">
+  <img src="images/plot_df_hvplot.scatter.png" width="800">
+</p><br/><br/> 
+
 * Plot "TotalCoinsMined" vs "TotalCoinSupply", the data is ordered by "Class", using hvplot.scatter. 
 
       plot_df.hvplot.scatter(
