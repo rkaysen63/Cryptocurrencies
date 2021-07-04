@@ -191,7 +191,7 @@
       plot_df = pd.concat([df_scaled, df1], axis=1).reindex(df1.index)<br/><br/>
 
 <p align="center">
-  <img src="images/plot_df_hvplot.scatter.png" width="800">
+  <img src="images/plot_df.png" width="500">
 </p><br/><br/> 
 
 * Plot "TotalCoinsMined" vs "TotalCoinSupply", the data is ordered by "Class", using hvplot.scatter. 
@@ -220,6 +220,12 @@
 </p><br/><br/> 
 
 ## Summary:
-
+* The purpose of this analysis of cryptocurrency data is to determine which of the cryptocurrencies are on the trading market and how they can be grouped.  
+* The analysis will be performed using unsupervised machine learning models.  
+  * The data will be preprocessed to clean the data set, to reduce it to only cryptocurrencies that are traded, to create numeric variables for features, and to scale the features.  
+  * Then 98 features will be reduced to three principal components using sklearn.decomposition.PCA in order to visualize the results in three dimensions.  
+  * The cryptocurrencies will be clustered using sklearn.cluster.KMeans.
+  * The results will be visualized through both an hvplot.table and scatter plots.
+ Using machine learning model, sklearn
 
 [Back to the Table of Contents](https://github.com/rkaysen63/Cryptocurrencies/blob/master/README.md#table-of-contents)
